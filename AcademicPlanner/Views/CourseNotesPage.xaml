@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AcademicPlanner.ViewModel"
+             x:DataType="vm:CourseViewModel"
+             xmlns:Entities="clr-namespace:AcademicPlanner.CoreEntities;assembly=AcademicPlanner.CoreEntities"
+             x:Class="AcademicPlanner.Views.CourseNotesPage"
+             Title="Course Notes">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior 
+            IsVisible="True" IsEnabled="True" 
+            Command="{Binding CancelEditCommand}"/>
+    </Shell.BackButtonBehavior>
+    <StackLayout Margin="10,10,10,10">
+        <Frame>
+            <Editor 
+                x:Name="editor"
+                Text="{Binding SelectedCourse.Notes}"
+                Placeholder="Enter your notes here"
+                HeightRequest="250" />
+        </Frame>
+        <StackLayout 
+            Orientation="Horizontal" 
+            HorizontalOptions="End">
+            <ImageButton
+                ToolTipProperties.Text="Share Note"
+                Source="share_icon200x200.png"
+                Margin="0, 10, 0, 0"
+                Padding="0,0,0,0"
+                HeightRequest="40"
+                Command="{Binding ShareTextCommand}"
+                CommandParameter="{Binding SelectedCourse.Notes}">
+            </ImageButton>
+            <ImageButton
+                ToolTipProperties.Text="Save Note"
+                Source="save_icon200x200"
+                Margin="0, 10, 0, 0"
+                Padding="0,0,0,0"
+                HeightRequest="40"
+                Command="{Binding UpdateCourseCommand}">
+            </ImageButton>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

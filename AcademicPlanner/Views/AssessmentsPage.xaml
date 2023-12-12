@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AcademicPlanner.ViewModel"
+             x:DataType="vm:AssessmentViewModel"
+             xmlns:Entities="clr-namespace:AcademicPlanner.CoreEntities;assembly=AcademicPlanner.CoreEntities"
+             x:Class="AcademicPlanner.Pages.AssessmentsPage"
+             Title="AssessmentsPage">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="True" IsEnabled="True" 
+                            Command="{Binding GoToCoursesPageCommand}"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid RowDefinitions="30, 100, Auto, *"
+      ColumnDefinitions=".75*, .25*"
+      Padding="10"
+      RowSpacing="1"
+      ColumnSpacing="10"
+      >
+
+        <Image 
+        Grid.Row="1"
+        Grid.ColumnSpan="2"
+        x:Name="logo"
+        Source="wgu_logo.png"
+        BackgroundColor="Transparent"
+           />
+
+        <Entry Placeholder="Enter Assessment Name"
+           Text="{Binding Text}"
+           Grid.Row="2"
+           Grid.Column="0"/>
+
+        <Button Text="Add"
+            Command="{Binding AddCommand}"
+            Grid.Row="2"
+            Grid.Column="1"/>
+
+        
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="2"
+            SelectionMode="None"
+            x:Name="AssessmentCollection"
+            ItemsSource="{Binding AssessmentCollection}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="Entities:Assessment">
+                    <StackLayout>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                        IsDestructive="True"
+                                        BackgroundColor="Red"
+                                        Command="{Binding BindingContext.DeleteCommand, Source={x:Reference AssessmentCollection}}"
+                                        CommandParameter="{Binding}">
+                                    </SwipeItem>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <SwipeView.Content>
+                                <Frame>
+                                    <StackLayout 
+                                        Orientation="Vertical" 
+                                        Spacing="1">
+                                            <StackLayout
+                                                    Orientation="Horizontal" Spacing="10">
+                                                <Label 
+                                                        x:Name="TitleLabel"
+                                                        Text="{Binding assessmentName}"
+                                                        IsVisible="True"                                                   
+                                                        FontSize="Title"
+                                                        FontAttributes="Bold"/>
+                                                <ImageButton
+                                                        Source="edit_icon200x200.png" 
+                                                        WidthRequest="20"
+                                                        HeightRequest="20"
+                                                        Command="{Binding BindingContext.ToggleEditModeCommand, Source={x:Reference AssessmentCollection}}"
+                                                        CommandParameter="{Binding .}">
+                                                </ImageButton>
+                                            </StackLayout>
+
+                                        <Label 
+                                            x:Name="TypeLabel"
+                                            Text="{Binding assessmentType}"
+                                            IsVisible="True"                                                   
+                                            FontSize="Subtitle"
+                                            FontAttributes="None"/>
+
+                                        <StackLayout Orientation="Horizontal" Spacing="10">
+                                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                                    <Label 
+                                                            Text="{Binding StartDate.Date , StringFormat='{0:MM/dd/yyyy}'}" 
+                                                            FontSize="Header"/>
+                                                    <Image
+                                                            Source="calendar_icon200x200.png" 
+                                                            VerticalOptions="Center"
+                                                            WidthRequest="20" 
+                                                            HeightRequest="20"/>
+                                                </StackLayout>
+                                                <Label Text="-" Padding="0,0,0,0" FontSize="Body" VerticalOptions="Center"></Label>
+                                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                                    <Label 
+                                                            Text="{Binding EndDate.Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                                    <Image
+                                                            Source="calendar_icon200x200.png" 
+                                                            VerticalOptions="Center"
+                                                            WidthRequest="20" 
+                                                            HeightRequest="20" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                    </StackLayout>
+
+                                </Frame>
+                            </SwipeView.Content>
+                        </SwipeView>
+
+                    </StackLayout>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

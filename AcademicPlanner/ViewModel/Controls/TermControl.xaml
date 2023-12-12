@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AcademicPlanner.ViewModel"
+             x:DataType="vm:TermViewModel"
+             x:Class="AcademicPlanner.ViewModel.Controls.TermControl">
+    
+    <!-- 
+        Note:
+        Since I am binding to the SelectedTerm, Making changes will update the term
+        in and I can then just save it to the DB. I do not have to pass the changed parameters since I 
+        am directly binding to the object.
+    
+        Controls should be moved to Views folder, not viewmodel
+    -->
+    <VerticalStackLayout
+    Spacing="5"
+    Padding="10, 5, 10, 5"
+    >
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                Text="Term Title: "
+                FontSize="Body"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+                <Entry 
+                x:Name="Title"
+                Text="{Binding SelectedTerm.TermTitle}"
+                FontSize="Body"
+                HeightRequest="40"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                Text="Term Start: "
+                FontSize="Body"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+                <DatePicker 
+                x:Name="Start"
+                MaximumDate="{Binding SelectedTerm.EndDate}"
+                Date="{Binding SelectedTerm.StartDate}" 
+                FontSize="Body"
+                HeightRequest="40"/>
+                <Image
+                Source="calendar_icon200x200.png" 
+                VerticalOptions="Center"
+                WidthRequest="20" 
+                HeightRequest="20"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                Text="Term End: "
+                FontSize="Body"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+                <DatePicker
+                x:Name="End"
+                MinimumDate="{Binding SelectedTerm.StartDate}"
+                Date="{Binding SelectedTerm.EndDate}" 
+                FontSize="Body"
+                HeightRequest="40"/>
+                <Image
+                Source="calendar_icon200x200.png" 
+                VerticalOptions="Center"
+                WidthRequest="20" 
+                HeightRequest="20"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Button
+            Text="Save Changes"
+            FontSize="Medium"
+            Margin="0, 10, 0, 0"
+            Padding="0,0,0,0"
+            HeightRequest="40"
+            Command="{Binding UpdateTermCommand}">
+        </Button>
+    </VerticalStackLayout>
+    
+</ContentView>

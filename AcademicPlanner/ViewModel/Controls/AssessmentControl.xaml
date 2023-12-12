@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AcademicPlanner.ViewModel"
+             x:DataType="vm:AssessmentViewModel"
+             x:Class="AcademicPlanner.ViewModel.Controls.AssessmentControl"
+             >
+
+    <VerticalStackLayout
+        Spacing="5"
+        Padding="10, 5, 10, 5"
+>
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Assessment Name: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <Entry 
+                    x:Name="Title"
+                    Text="{Binding SelectedAssessment.assessmentName}"
+                    FontSize="Body"
+                    HeightRequest="40"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="75">
+            <Picker 
+                x:Name="picker"
+                Title="Assessment Status"
+                SelectedItem="{Binding SelectedAssessment.assessmentType}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Performance Assessment</x:String>
+                        <x:String>Objective Assessment</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Assessment Start: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <DatePicker 
+                    x:Name="Start"
+                    MaximumDate="{Binding SelectedAssessment.EndDate}"
+                    Date="{Binding SelectedAssessment.StartDate}" 
+                    FontSize="Body"
+                    HeightRequest="40"/>
+                <Image
+                    Source="calendar_icon200x200.png" 
+                    VerticalOptions="Center"
+                    WidthRequest="20" 
+                    HeightRequest="20"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Assessment End: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <DatePicker
+                    x:Name="End"
+                    MinimumDate="{Binding SelectedAssessment.StartDate}"
+                    Date="{Binding SelectedAssessment.EndDate}" 
+                    FontSize="Body"
+                    HeightRequest="40"/>
+                <Image
+                    Source="calendar_icon200x200.png" 
+                    VerticalOptions="Center"
+                    WidthRequest="20" 
+                    HeightRequest="20"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Button
+            Text="Save Changes"
+            FontSize="Medium"
+            Margin="0, 10, 0, 0"
+            Padding="0,0,0,0"
+            HeightRequest="40"
+            Command="{Binding UpdateCommand}">
+        </Button>
+        <Button
+            Text="Cancel"
+            FontSize="Medium"
+            Margin="0, 10, 0, 0"
+            Padding="0,0,0,0"
+            HeightRequest="40"
+            Command="{Binding CancelEditCommand}">
+        </Button>
+    </VerticalStackLayout>
+</ContentView>

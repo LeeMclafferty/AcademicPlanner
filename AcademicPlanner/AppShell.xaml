@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AcademicPlanner.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AcademicPlanner"
+    xmlns:views="clr-namespace:AcademicPlanner.Views"
+    xmlns:pages="clr-namespace:AcademicPlanner.Pages"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        Title="Terms"
+        ContentTemplate="{DataTemplate local:TermsPage}"
+        Route="TermsPage" />
+
+    <ShellContent 
+               ContentTemplate="{DataTemplate views:EditTermPage}" 
+               Route="EditTermPage" />
+
+    <ShellContent 
+               ContentTemplate="{DataTemplate pages:CoursesPage}" 
+               Route="CoursesPage" />
+
+    <ShellContent 
+               ContentTemplate="{DataTemplate views:EditCoursePage}" 
+               Route="EditCoursesPage" />
+
+    <ShellContent 
+               ContentTemplate="{DataTemplate views:CourseNotesPage}" 
+               Route="EditCoursesPage" />
+
+    <ShellContent 
+               ContentTemplate="{DataTemplate pages:AssessmentsPage}" 
+               Route="AssessmentsPage" />
+
+    <ShellContent 
+               ContentTemplate="{DataTemplate views:EditAssessmentPage}" 
+               Route="EditAssessmentPage" />
+
+    <ShellContent 
+               ContentTemplate="{DataTemplate views:Test}" 
+               Route="EditCoursesPage" />
+</Shell>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AcademicPlanner.ViewModel"
+             x:DataType="vm:CourseViewModel"
+             x:Class="AcademicPlanner.ViewModel.Controls.CourseControl"
+             >
+
+    <VerticalStackLayout
+        Spacing="5"
+        Padding="10, 5, 10, 5"
+>
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Course Name: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <Entry 
+                    x:Name="Title"
+                    Text="{Binding SelectedCourse.Name}"
+                    FontSize="Body"
+                    HeightRequest="40"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+        </Frame>
+        
+        <Frame HeightRequest="75">
+            <Picker 
+                x:Name="picker"
+                Title="Course Status"
+                SelectedItem="{Binding SelectedCourse.CourseStatus}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Not Started</x:String>
+                        <x:String>In Progress</x:String>
+                        <x:String>Complete</x:String>
+                        <x:String>Dropped</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Frame>
+    
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Course Start: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <DatePicker 
+                    x:Name="Start"
+                    MaximumDate="{Binding SelectedCourse.EndDate}"
+                    Date="{Binding SelectedCourse.StartDate}" 
+                    FontSize="Body"
+                    HeightRequest="40"/>
+                <Image
+                    Source="calendar_icon200x200.png" 
+                    VerticalOptions="Center"
+                    WidthRequest="20" 
+                    HeightRequest="20"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Course End: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <DatePicker
+                    x:Name="End"
+                    MinimumDate="{Binding SelectedCourse.StartDate}"
+                    Date="{Binding SelectedCourse.EndDate}" 
+                    FontSize="Body"
+                    HeightRequest="40"/>
+                <Image
+                    Source="calendar_icon200x200.png" 
+                    VerticalOptions="Center"
+                    WidthRequest="20" 
+                    HeightRequest="20"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Instructor Name: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <Entry 
+                    Text="{Binding SelectedCourse.InstructorName}"
+                    FontSize="Body"
+                    HeightRequest="40"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Instructor Email: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <Entry 
+                    Text="{Binding SelectedCourse.InstuctorEmail}"
+                    FontSize="Body"
+                    HeightRequest="40"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame HeightRequest="70">
+            <HorizontalStackLayout>
+                <Label
+                    Text="Instructor Phone: "
+                    FontSize="Body"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <Entry 
+                    Text="{Binding SelectedCourse.InstuctorPhone}"
+                    FontSize="Body"
+                    HeightRequest="40"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Button
+            Text="Save Changes"
+            FontSize="Medium"
+            Margin="0, 10, 0, 0"
+            Padding="0,0,0,0"
+            HeightRequest="40"
+            Command="{Binding UpdateCourseCommand}">
+        </Button>
+        <Button
+            Text="Cancel"
+            FontSize="Medium"
+            Margin="0, 10, 0, 0"
+            Padding="0,0,0,0"
+            HeightRequest="40"
+            Command="{Binding CancelEditCommand}">
+        </Button>
+    </VerticalStackLayout>
+</ContentView>
